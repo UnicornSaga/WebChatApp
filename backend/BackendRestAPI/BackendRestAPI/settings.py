@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'BackendRestAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'se',
-        'USER': 'root',
-        'PASSWORD': 'dat972002',
-        'HOST': '127.0.0.1',
+        'NAME': 'j6euz5gefxizih0n',
+        'USER': 'rp4hdt3fxkko5vpb',
+        'PASSWORD': 'criu4ojqvom3wcxd',
+        'HOST': 'jtb9ia3h1pgevwb1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
