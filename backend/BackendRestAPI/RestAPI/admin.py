@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .Models.Todo import Todo
+from .Models.Users import User
 
 # Register your models here.
-admin.site.register(Todo)
+admin.site.register(User)

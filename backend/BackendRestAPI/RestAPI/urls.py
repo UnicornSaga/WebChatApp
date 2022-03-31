@@ -1,7 +1,7 @@
-from django.urls import re_path
+from django.urls import re_path,path
 from RestAPI import views
 
 urlpatterns = [
-    re_path(r'^todo/$', views.todo_list),
-    re_path(r'^todo/(?P<pk>[0-9]+)/$', views.todo_detail)
+    re_path(r'^user/$', views.user_list),
+    path('user/<str:email>', views.user_detail),
 ]

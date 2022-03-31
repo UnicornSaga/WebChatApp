@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from rest_framework import status
-from .Models.Todo import Todo
-from RestAPI.serializers import TodoSerializer
+from .Models.Users import User
+from RestAPI.serializers import UserSerializer
+
 
 # Create your views here.
 class JSONResponse(HttpResponse):
@@ -14,36 +16,45 @@ class JSONResponse(HttpResponse):
         super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
-def todo_list(request):
+def user_list(request):
+    """
+    List all code users, or create a new user.
+    """
     if request.method == 'GET':
-        Todos = Todo.objects.all()
-        Todo_serializer = TodoSerializer(Todos, many=True)
-        return JSONResponse(Todo_serializer.data)
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return JSONResponse(serializer.data)
+
     elif request.method == 'POST':
-        Todo_data = JSONParser().parse(request)
-        Todo_serializer = TodoSerializer(data=Todo_data)
-        if Todo_serializer.is_valid():
-            Todo_serializer.save()
-            return JSONResponse(Todo_serializer.data, status=status.HTTP_201_CREATED)
-        return JSONResponse(Todo_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JSONResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
-def todo_detail(request, name):
+def user_detail(request, email):
+    """
+    Retrieve, update or delete a code user.
+    """
     try:
-        todo = Todo.objects.get(name=name)
-    except Todo.DoesNotExist:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        todo_serializer = TodoSerializer(todo)
-        return JSONResponse(todo_serializer.data)
+        serializer = UserSerializer(user)
+        return JSONResponse(serializer.data)
+
     elif request.method == 'PUT':
-        todo_data = JSONParser().parse(request)
-        todo_serializer = TodoSerializer(todo, data=todo_data)
-        if todo_serializer.is_valid():
-            todo_serializer.save()
-            return JSONResponse(todo_serializer.data)
-        return JSONResponse(todo_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     elif request.method == 'DELETE':
-        todo.delete()
+        user.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
