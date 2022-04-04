@@ -5,6 +5,8 @@ from jose import jwt
 from rest_framework import exceptions
 from rest_framework.authentication import (BaseAuthentication, get_authorization_header)
 from RestAPI.Models.Auth0User import Auth0User
+import os
+
 User = get_user_model()
 
 

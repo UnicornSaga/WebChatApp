@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,9 +55,9 @@ REST_FRAMEWORK = {
 }
 
 # auth0 settings
-AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
 AUTH0_ALGORITHMS = ['RS256']
-AUTH0_API_AUDIENCE = os.getenv('AUTH0_API_AUDIENCE')
+AUTH0_API_AUDIENCE = os.getenv("AUTH0_API_AUDIENCE")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
