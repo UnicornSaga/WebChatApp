@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +43,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'RestAPI',
 ]
+
+# rest framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'auth0.authentication.Auth0TokenAuthentication',
+    ]
+}
+
+# auth0 settings
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+AUTH0_ALGORITHMS = ['RS256']
+AUTH0_API_AUDIENCE = os.getenv('AUTH0_API_AUDIENCE')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

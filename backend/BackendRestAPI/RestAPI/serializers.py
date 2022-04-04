@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .Models.Users import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.CharField(max_length=200)

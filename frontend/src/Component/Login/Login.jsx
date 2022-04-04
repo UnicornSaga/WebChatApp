@@ -6,7 +6,7 @@ import LoginImg from "../../Assets/gojo.jpg";
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Login = () => {
-    const { loginWithRedirect } = useAuth0();
+    const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
 
     return (
         <div className="container">
@@ -29,6 +29,13 @@ const Login = () => {
                         >
                             Start Loging In
                         </button>
+                        {isAuthenticated && <button
+                            onClick={() => logout({
+                                returnTo: window.location.origin,
+                            })}
+                        >
+                            Logout
+                        </button>}
                     </div>
                 </div>
             </div>
