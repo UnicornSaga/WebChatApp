@@ -18,6 +18,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
       clientId={clientId}
       redirectUri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
+      scope="read:posts"
     >
       {children}
     </Auth0Provider>

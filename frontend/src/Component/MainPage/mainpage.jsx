@@ -6,14 +6,7 @@ const Main = () => {
 
     return (
         <div>
-            Hello World
-            <button
-                onClick={() => logout({
-                    returnTo: window.location.origin,
-                })}
-            >
-                Log Out
-            </button>
+            Hello world
         </div>
     )
 }

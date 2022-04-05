@@ -88,7 +88,7 @@ class Auth0TokenAuthentication(BaseAuthentication):
         if not is_valid:
             raise exceptions.AuthenticationFailed(self.err_msg)
 
-        auth0_username = payload['sub'].split('|')[1]
+        auth0_username = payload.get('sub').replace('|', '.')
         auth0_user = Auth0User.objects.filter(username=auth0_username).last()
         if not auth0_user:
             user_data = get_auth0_user_data(token)
