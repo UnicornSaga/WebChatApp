@@ -7,17 +7,17 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const Login = () => {
     const { loginWithRedirect, isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0();
-    
-    useEffect(() => {
-        (async () => {
-          try {
-            const token = await getAccessTokenSilently();
-            console.log(token);
-          } catch (e) {
-            console.error(e);
-          }
-        })();
-      }, [getAccessTokenSilently]);
+
+    // useEffect(() => {
+    //     (async () => {
+    //       try {
+    //         const token = await getAccessTokenSilently();
+    //         console.log(token);
+    //       } catch (e) {
+    //         console.error(e);
+    //       }
+    //     })();
+    //   }, [getAccessTokenSilently]);
 
     return (
         <div className="container">
@@ -36,7 +36,7 @@ const Login = () => {
                         <h2>Login to your account</h2>
                         <p>See what is going on in the crypto market</p>
                         <button
-                            onClick={() => loginWithRedirect()}
+                            onClick={(e) => { e.preventDefault(); loginWithRedirect() }}
                         >
                             Start Loging In
                         </button>
