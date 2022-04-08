@@ -4,20 +4,27 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import "./Login.scss";
 import LoginImg from "../../Assets/gojo.jpg";
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { loginWithRedirect, isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0();
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     (async () => {
-    //       try {
-    //         const token = await getAccessTokenSilently();
-    //         console.log(token);
-    //       } catch (e) {
-    //         console.error(e);
-    //       }
-    //     })();
-    //   }, [getAccessTokenSilently]);
+    /* useEffect(() => {
+         (async () => {
+             try {
+               const token = await getAccessTokenSilently();
+               console.log(token);
+           } catch (e) {
+             console.error(e);
+           }
+         })();
+       }, [getAccessTokenSilently]); */
+
+    useEffect(() => {
+    if (!isAuthenticated) return;
+    return navigate("/main");
+    }, [isAuthenticated])
 
     return (
         <div className="container">
