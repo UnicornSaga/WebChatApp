@@ -10,7 +10,7 @@ const Login = () => {
     const { loginWithRedirect, isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0();
     const navigate = useNavigate();
 
-    /* useEffect(() => {
+    useEffect(() => {
          (async () => {
              try {
                const token = await getAccessTokenSilently();
@@ -19,7 +19,7 @@ const Login = () => {
              console.error(e);
            }
          })();
-       }, [getAccessTokenSilently]); */
+       }, [getAccessTokenSilently]);
 
     useEffect(() => {
     if (!isAuthenticated) return;
@@ -31,7 +31,7 @@ const Login = () => {
             <div className="row">
                 <div className="col-md-6">
                     <div className="hideImg">
-                        <img src={LoginImg} />
+                        <img src={LoginImg}/>
                     </div>
                 </div>
 
