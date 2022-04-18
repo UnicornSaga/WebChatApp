@@ -2,14 +2,15 @@ from rest_framework import serializers
 from .Models.Users import User
 
 class UserSerializer(serializers.ModelSerializer):
-    email = serializers.CharField(max_length=200)
+    email = serializers.CharField(required=False, max_length=200)
     name = serializers.CharField(required=False, max_length=200)
     description = serializers.CharField(required=False, max_length=500)
     age = serializers.IntegerField(required=False, default = 18)
     friendlist = serializers.ListField(
         child = serializers.CharField(max_length=200),
         allow_empty=True,
-        max_length=1000
+        max_length=1000,
+        required=False,
     )
 
     def create(self, validated_data):
