@@ -4,3 +4,4 @@ python-jose
 requests
 mysqlclient
 python-dotenv
+django_mysql
