@@ -17,7 +17,6 @@ function App() {
 
   const { isLoading } = useAuth0();
 
-
   if (isLoading) {
     return <PacmanLoader 
               color={'#36D7B7'} isLoading={isLoading}

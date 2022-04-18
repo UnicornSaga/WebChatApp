@@ -3,9 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import io from 'socket.io-client';
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
+import { fetchUserInfo } from '../../services/UserInfo.service';
 
 const Main = () => {
-    const { logout, getAccessTokenSilently } = useAuth0();
+    const { logout, getAccessTokenSilently, user } = useAuth0();
+    const { email } = user;
 
     const [socket, setSocket] = useState(null);
 
@@ -15,16 +17,19 @@ const Main = () => {
         return () => newSocket.close();
     }, [setSocket]);
 
-    /* useEffect(() => {
+    useEffect(() => {
         (async () => {
             try {
               const token = await getAccessTokenSilently();
               console.log(token);
+              console.log(user.sub);
+              const data = await fetchUserInfo(email, token);
+              console.log(data);
           } catch (e) {
             console.error(e);
           }
         })();
-      }, [getAccessTokenSilently]); */
+      }, [getAccessTokenSilently]);
 
     return (
         <div>
@@ -41,7 +46,7 @@ const Main = () => {
                 { socket ? (
                     <div>
                         <Messages socket={socket} />
-                        <MessageInput socket={socket} />
+                        <MessageInput socket={socket} identity={email} />
                     </div>
                 ) : (
                     <div>Not connected</div>

@@ -41,11 +41,8 @@ class UserViewset(viewsets.ModelViewSet):
 
     def retrieve(self, request, email=None):
         # GET - Show <email> user
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserSerializer(user)
+        user = User.objects.get_or_create(email=email)
+        serializer = UserSerializer(user[0])
         return JSONResponse(serializer.data)
 
     def partial_update(self, request, email=None):
