@@ -31,11 +31,11 @@ class Connection {
     messages.forEach((message) => this.sendMessage(message));
   }
 
-  handleMessage(value) {
+  handleMessage(temp) {
     const message = {
       id: uuidv4(),
-      user: users.get(this.socket) || defaultUser,
-      value,
+      user: temp.user || defaultUser,
+      value: temp.input,
       time: Date.now()
     };
 

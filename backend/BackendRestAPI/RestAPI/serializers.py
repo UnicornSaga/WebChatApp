@@ -3,8 +3,8 @@ from .Models.Users import User
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.CharField(max_length=200)
-    name = serializers.CharField(max_length=200)
-    description = serializers.CharField(max_length=500)
+    name = serializers.CharField(required=False, max_length=200)
+    description = serializers.CharField(required=False, max_length=500)
     age = serializers.IntegerField(required=False, default = 18)
 
     def create(self, validated_data):

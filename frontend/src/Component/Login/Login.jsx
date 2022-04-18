@@ -11,17 +11,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-         (async () => {
-             try {
-               const token = await getAccessTokenSilently();
-               console.log(token);
-           } catch (e) {
-             console.error(e);
-           }
-         })();
-       }, [getAccessTokenSilently]);
-
-    useEffect(() => {
     if (!isAuthenticated) return;
     return navigate("/main");
     }, [isAuthenticated])
