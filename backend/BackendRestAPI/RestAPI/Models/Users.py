@@ -8,7 +8,7 @@ class User(models.Model):
     description = models.CharField(max_length=500)
     age = models.IntegerField()
     friendlist = ListCharField(
-        models.EmailField(max_length=200),
+        models.CharField(max_length=200),
         max_length=1000,
         null = True
     )

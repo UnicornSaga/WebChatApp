@@ -7,9 +7,9 @@ class UserSerializer(serializers.ModelSerializer):
     description = serializers.CharField(max_length=500)
     age = serializers.IntegerField(required=False, default = 18)
     friendlist = serializers.ListField(
-        serializers.EmailField(max_length=200),
-        max_length=1000,
-        null = True
+        child = serializers.CharField(max_length=200),
+        allow_empty=True,
+        max_length=1000
     )
 
     def create(self, validated_data):
