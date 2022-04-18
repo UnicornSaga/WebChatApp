@@ -21,7 +21,7 @@ export async function fetchUserInfo(email, token) {
         })
         
     console.log(userInfo);
-    return userInfo;
+    return userInfo ?? createNewUser(email, token);
 }
 
 
