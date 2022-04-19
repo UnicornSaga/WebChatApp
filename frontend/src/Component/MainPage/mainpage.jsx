@@ -22,7 +22,6 @@ const Main = () => {
             try {
               const token = await getAccessTokenSilently();
               console.log(token);
-              console.log(user.sub);
               const data = await fetchUserInfo(email, token);
               console.log(data);
           } catch (e) {

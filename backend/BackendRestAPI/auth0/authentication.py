@@ -99,6 +99,7 @@ class Auth0TokenAuthentication(BaseAuthentication):
             user, _ = User.objects.get_or_create(email=email)
             auth0_user = Auth0User.objects.create(
                 username=auth0_username, user=user)
+            print(auth0_user)
             auth0_user.user = user
             auth0_user.save()
         return auth0_user.user, token
