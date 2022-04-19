@@ -20,7 +20,6 @@ export async function fetchUserInfo(email, token) {
             console.error(error);
         })
         
-    console.log(userInfo);
     return userInfo;
 }
 
@@ -46,4 +45,15 @@ async function createNewUser(email, token) {
         .catch((error) => {
             console.error(error);
         })
+}
+
+export async function updateUserInfo(user, token) {
+    return await axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_API_BASE_URL}/users/${user.email}/`,
+        headers: { authorization: `Bearer ${token}` },
+        data: {
+            ...user,
+        }
+    })
 }

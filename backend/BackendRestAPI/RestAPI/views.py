@@ -18,7 +18,7 @@ class JSONResponse(HttpResponse):
 
 class UserViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    # queryset = User.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
     lookup_field = 'email'
@@ -45,7 +45,7 @@ class UserViewset(viewsets.ModelViewSet):
         serializer = UserSerializer(user[0])
         return JSONResponse(serializer.data)
 
-    def partial_update(self, request, email=None):
+    def update(self, request, email=None):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:

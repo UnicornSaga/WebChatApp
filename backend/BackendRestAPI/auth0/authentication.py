@@ -89,7 +89,6 @@ class Auth0TokenAuthentication(BaseAuthentication):
             raise exceptions.AuthenticationFailed(self.err_msg)
 
         auth0_username = payload['sub'].split('|')[1]
-        print(auth0_username)
         auth0_user = Auth0User.objects.filter(username=auth0_username).last()
         if not auth0_user:
             user_data = get_auth0_user_data(token)
@@ -100,6 +99,7 @@ class Auth0TokenAuthentication(BaseAuthentication):
             user, _ = User.objects.get_or_create(email=email)
             auth0_user = Auth0User.objects.create(
                 username=auth0_username, user=user)
+            print(auth0_user)
             auth0_user.user = user
             auth0_user.save()
         return auth0_user.user, token
