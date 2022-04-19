@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .Models.Users import User
 
 class UserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     email = serializers.CharField(required=False, max_length=200)
     name = serializers.CharField(required=False, max_length=200)
     description = serializers.CharField(required=False, max_length=500)
@@ -17,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         return User.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
         instance.email = validated_data.get('email', instance.email)
         instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get('description', instance.description)
