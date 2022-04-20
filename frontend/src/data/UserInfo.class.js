@@ -1,9 +1,11 @@
 class UserInfo {
-    constructor(email, name, description, age) {
+    constructor(id, email, name, description, age, friendlist) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.description = description;
         this.age = age;
+        this.friendlist = friendlist;
     }
 
     toJSON() {

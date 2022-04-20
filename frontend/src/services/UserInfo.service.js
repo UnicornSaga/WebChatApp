@@ -10,10 +10,12 @@ export async function fetchUserInfo(email, token) {
         .then((res) => {
             const d = res.data;
             return new UserInfo(
+                d.id,
                 d.email,
                 d.name, 
                 d.description,
                 d.age,
+                d.friendlist,
             )
         })
         .catch((error) => {
@@ -24,7 +26,7 @@ export async function fetchUserInfo(email, token) {
 }
 
 
-async function createNewUser(email, token) {
+/* async function createNewUser(email, token) {
     return await axios({
         method: "POST",
         url: `${process.env.REACT_APP_API_BASE_URL}/users/`,
@@ -45,12 +47,12 @@ async function createNewUser(email, token) {
         .catch((error) => {
             console.error(error);
         })
-}
+} */
 
 export async function updateUserInfo(user, token) {
     return await axios({
         method: "PUT",
-        url: `${process.env.REACT_APP_API_BASE_URL}/users/${user.email}/`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/users/${user.id}/`,
         headers: { authorization: `Bearer ${token}` },
         data: {
             ...user,

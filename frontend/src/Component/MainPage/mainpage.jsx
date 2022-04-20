@@ -10,6 +10,8 @@ const Main = () => {
     const { email } = user;
 
     const [socket, setSocket] = useState(null);
+    const [accessToken, setAccessToken] = useState();
+    const [customer, setCustomer] = useState();
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`);
@@ -24,6 +26,7 @@ const Main = () => {
               console.log(token);
               const data = await fetchUserInfo(email, token);
               console.log(data);
+              setCustomer(data);
           } catch (e) {
             console.error(e);
           }
