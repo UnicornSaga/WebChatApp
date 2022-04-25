@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Component/Login/Login";
 import Main from './Component/MainPage/mainpage';
+import Settings from './Component/Settings/Settings';
 import { PacmanLoader } from 'react-spinners';
 import { useAuth0 } from '@auth0/auth0-react';
 import io from 'socket.io-client';
@@ -30,6 +31,11 @@ function App() {
       <Route path="/main" element={
         <RequireAuth redirectTo="/">
           <Main />
+        </RequireAuth>
+      } />
+      <Route path="/settings" element={
+        <RequireAuth redirectTo="/">
+          <Settings />
         </RequireAuth>
       } />
     </Routes>
