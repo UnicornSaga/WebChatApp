@@ -1,50 +1,25 @@
+import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Component/Login/Login";
-import Main from './Component/MainPage/mainpage';
-import Settings from './Component/Settings/Settings';
-import { PacmanLoader } from 'react-spinners';
-import { useAuth0 } from '@auth0/auth0-react';
-import io from 'socket.io-client';
 
 function App() {
-  const override = `
-  display: block;
-  margin: auto auto;
-  border-color: red;
-  `;
-
-  const { isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <PacmanLoader 
-              color={'#36D7B7'} isLoading={isLoading}
-              css={override} size={150} 
-            />
-  }
-
   return (
-    <Routes>
-      <Route path="/" exact element={<Login />} />
-      <Route path="/main" element={
-        <RequireAuth redirectTo="/">
-          <Main />
-        </RequireAuth>
-      } />
-      <Route path="/settings" element={
-        <RequireAuth redirectTo="/">
-          <Settings />
-        </RequireAuth>
-      } />
-    </Routes>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
-}
-
-function RequireAuth({ children, redirectTo }) {
-  const { isAuthenticated } = useAuth0();
-  return isAuthenticated ? children : <Navigate to={redirectTo} />
 }
 
 export default App;
