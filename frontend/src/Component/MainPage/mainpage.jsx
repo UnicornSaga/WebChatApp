@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
 import { fetchUserInfo } from '../../services/UserInfo.service';
-import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -13,8 +12,6 @@ const Main = () => {
     const [socket, setSocket] = useState(null);
     const [accessToken, setAccessToken] = useState();
     const [customer, setCustomer] = useState();
-    
-    const navigate = useNavigate();
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`);
@@ -45,13 +42,6 @@ const Main = () => {
                 })}
             >
                 Logout
-            </button>
-            <button
-                onClick={() => {
-                    navigate("/settings")
-                }}
-            >
-                ⚙ Settings
             </button>
 
             <div>
