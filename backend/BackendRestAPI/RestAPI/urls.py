@@ -1,7 +1,12 @@
-from django.urls import re_path
+from sys import prefix
+from xml.etree.ElementInclude import include
+from django.urls import re_path,path, include
+from rest_framework.routers import DefaultRouter
 from RestAPI import views
 
+router = DefaultRouter()
+router.register(prefix=r'users', viewset=views.UserViewset, basename='user')
+
 urlpatterns = [
-    re_path(r'^todo/$', views.todo_list),
-    re_path(r'^todo/(?P<pk>[0-9]+)/$', views.todo_detail)
+    path('', include(router.urls)),
 ]
