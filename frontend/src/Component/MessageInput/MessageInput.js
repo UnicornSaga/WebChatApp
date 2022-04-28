@@ -3,6 +3,7 @@ import './MessageInput.scss';
 
 const NewMessage = ({ socket, identity }) => {
   const [value, setValue] = useState('');
+
   const submitForm = (e) => {
     e.preventDefault();
     const messageDetail = {

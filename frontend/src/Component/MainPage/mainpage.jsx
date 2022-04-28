@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import io from 'socket.io-client';
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
+import VideoCall from '../VideoCall/videoCall';
 import { fetchUserInfo } from '../../services/UserInfo.service';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,12 +18,17 @@ const Main = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const newSocket = io(`http://${window.location.hostname}:5000`);
+        const newSocket = io(`http://${window.location.hostname}:5000`, {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax : 5000,
+            reconnectionAttempts: 99999
+        });
         setSocket(newSocket);
         return () => newSocket.close();
     }, [setSocket]);
 
-    useEffect(() => {
+    /* useEffect(() => {
         (async () => {
             try {
               const token = await getAccessTokenSilently();
@@ -34,7 +40,7 @@ const Main = () => {
             console.error(e);
           }
         })();
-      }, [getAccessTokenSilently]);
+      }, [getAccessTokenSilently]); */
 
     return (
         <div>
@@ -59,6 +65,7 @@ const Main = () => {
                     <div>
                         <Messages socket={socket} />
                         <MessageInput socket={socket} identity={email} />
+                        <VideoCall identity={email} />
                     </div>
                 ) : (
                     <div>Not connected</div>

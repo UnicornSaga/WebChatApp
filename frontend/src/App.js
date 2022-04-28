@@ -1,15 +1,14 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Component/Login/Login";
 import Main from './Component/MainPage/mainpage';
 import Settings from './Component/Settings/Settings';
 import { PacmanLoader } from 'react-spinners';
 import { useAuth0 } from '@auth0/auth0-react';
-import io from 'socket.io-client';
 
 function App() {
+
   const override = `
   display: block;
   margin: auto auto;
