@@ -103,7 +103,17 @@ function Settings() {
     
     return (
         <>
-            <h1>Settings</h1>
+            <html>
+            <body>
+
+                <div class="sidenav">
+                    <a href="#home">Home</a>
+                    <a href="#search">Search</a>
+                    <a href="#settings">Setting</a>
+                </div>
+
+                <div class="main">
+                <h1>Settings</h1>
             
             <button
                 onClick={() => {
@@ -135,6 +145,10 @@ function Settings() {
 
                         </div>
                     </div>))}
+                </div>
+
+            </body>
+        </html>
         </>
     );
 }

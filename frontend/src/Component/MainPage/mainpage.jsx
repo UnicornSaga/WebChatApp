@@ -5,6 +5,9 @@ import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
 import { fetchUserInfo } from '../../services/UserInfo.service';
 import { useNavigate } from 'react-router-dom';
+import "./mainpage.scss";
+
+import './sidebar.jsx'
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -37,34 +40,49 @@ const Main = () => {
       }, [getAccessTokenSilently]);
 
     return (
-        <div>
-            Hello world
-            <button
-                onClick={() => logout({
-                    returnTo: window.location.origin,
-                })}
-            >
-                Logout
-            </button>
-            <button
-                onClick={() => {
-                    navigate("/settings")
-                }}
-            >
-                ⚙ Settings
-            </button>
+        <html>
+            <body>
 
-            <div>
-                { socket ? (
+                <div class="sidenav">
+                    <a href="#home">Home</a>
+                    <a href="#search">Search</a>
+                    <a href="#settings">Setting</a>
+                </div>
+
+                <div class="main">
                     <div>
-                        <Messages socket={socket} />
-                        <MessageInput socket={socket} identity={email} />
+                            Hello world
+                            <button
+                                onClick={() => logout({
+                                    returnTo: window.location.origin,
+                                })}
+                            >
+                            Logout
+                        </button>
+                        <button
+                            onClick={() => {
+                                navigate("/settings")
+                            }}
+                        >
+                            ⚙ Settings
+                        </button>
+
+                        <div>
+                            { socket ? (
+                                <div>
+                                    <Messages socket={socket} />
+                                    <MessageInput socket={socket} identity={email} />
+                                </div>
+                            ) : (
+                                <div>Not connected</div>
+                            )}
+                        </div>
                     </div>
-                ) : (
-                    <div>Not connected</div>
-                )}
-            </div>
-        </div>
+                </div>
+
+            </body>
+        </html>
+
     )
 }
 
