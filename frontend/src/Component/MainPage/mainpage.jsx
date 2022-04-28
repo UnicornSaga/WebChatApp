@@ -7,6 +7,8 @@ import { fetchUserInfo } from '../../services/UserInfo.service';
 import { useNavigate } from 'react-router-dom';
 import "./mainpage.scss";
 
+import homeIcon from "../../Assets/house.png";
+
 import './sidebar.jsx'
 
 const Main = () => {
@@ -44,7 +46,7 @@ const Main = () => {
             <body>
 
                 <div class="sidenav">
-                    <button href="#home">Home</button>
+                    <button href="#home"></button> <img src ={homeIcon} height = "40" width= "40"/>
                     <button href="#search">Search</button>
                     
                     

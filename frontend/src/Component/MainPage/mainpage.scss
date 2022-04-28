@@ -12,6 +12,7 @@ body {
     background-color: #C3A5F1;
     overflow-x: hidden;
     padding-top: 20px;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .sidenav button {
@@ -23,6 +24,9 @@ body {
     display: block;
     background-color: transparent;
     border: transparent;
+    padding-left: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .sidenav button:hover {
