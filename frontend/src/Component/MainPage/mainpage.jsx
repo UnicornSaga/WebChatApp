@@ -44,9 +44,20 @@ const Main = () => {
             <body>
 
                 <div class="sidenav">
-                    <a href="#home">Home</a>
-                    <a href="#search">Search</a>
-                    <a href="#settings">Setting</a>
+                    <button href="#home">Home</button>
+                    <button href="#search">Search</button>
+                    
+                    
+                   <footer>
+                   <button href = "#setting"
+                                onClick={() => {
+                                    navigate("/settings")
+                                }}
+                            >
+                                Setting
+                    </button>
+                   </footer>
+                        
                 </div>
 
                 <div class="main">
@@ -59,14 +70,6 @@ const Main = () => {
                             >
                             Logout
                         </button>
-                        <button
-                            onClick={() => {
-                                navigate("/settings")
-                            }}
-                        >
-                            ⚙ Settings
-                        </button>
-
                         <div>
                             { socket ? (
                                 <div>
@@ -82,7 +85,6 @@ const Main = () => {
 
             </body>
         </html>
-
     )
 }
 

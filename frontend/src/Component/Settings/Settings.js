@@ -106,10 +106,21 @@ function Settings() {
             <html>
             <body>
 
-                <div class="sidenav">
-                    <a href="#home">Home</a>
-                    <a href="#search">Search</a>
-                    <a href="#settings">Setting</a>
+            <div class="sidenav">
+                    <button href="#home">Home</button>
+                    <button href="#search">Search</button>
+                    
+                    
+                   <footer>
+                   <button href = "#setting"
+                                onClick={() => {
+                                    navigate("/settings")
+                                }}
+                            >
+                                Setting
+                    </button>
+                   </footer>
+                        
                 </div>
 
                 <div class="main">

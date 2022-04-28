@@ -9,21 +9,24 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #C3A5F1;
     overflow-x: hidden;
     padding-top: 20px;
 }
 
-.sidenav a {
+.sidenav button {
     padding: 6px 8px 6px 16px;
-    text-decoration: none;
+    text-decoration: None;
+    text-align: center;
     font-size: 25px;
-    color: #C3A5F1;
+    color: #000000;
     display: block;
+    background-color: transparent;
+    border: transparent;
 }
 
-.sidenav a:hover {
-    color: #f70cb0;
+.sidenav button:hover {
+    color: #3b052b;
 }
 
 .main {
@@ -43,3 +46,21 @@ body {
         font-size: 18px;
     }
 }
+
+/* setting */
+
+
+// button  {position: absolute;
+// width: 48px;
+// height: 55px;
+// left: 71px;
+// top: 991px;
+
+// font-family: 'arial';
+// font-style: normal;
+// font-weight: 900;
+// font-size: 48px;
+// line-height: 55px;
+
+// color: #000000;
+// }
