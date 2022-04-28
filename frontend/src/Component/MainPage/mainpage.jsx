@@ -11,6 +11,7 @@ import homeIcon from "../../Assets/house.png";
 import settingIcon from "../../Assets/setting.png";
 import searchIcon from "../../Assets/search.png";
 import AppIcon from "../../Assets/AppIcon.png";
+import logoutIcon from "../../Assets/logout.png";
 import './sidebar.jsx'
 
 const Main = () => {
@@ -64,7 +65,7 @@ const Main = () => {
                                     returnTo: window.location.origin,
                                 })}
                             >
-                            Logout
+                            <img src ={logoutIcon} height = "40" width= "40"/>
                         </button>
                    </footer>
                         
