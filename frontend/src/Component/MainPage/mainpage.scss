@@ -57,6 +57,23 @@ body {
     }
 }
 
+.footer {
+    margin-right: 0;
+}
+
+
+.messagle_box{
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 160;
+    background-color: #C3A5F1;
+    overflow-x: hidden;
+    padding-top: 20px;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
 /* setting */
 
 

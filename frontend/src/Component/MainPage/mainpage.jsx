@@ -72,18 +72,33 @@ const Main = () => {
                 </div>
 
                 <div class="main">
+
+                
+
+                <div class="message_box">
+
+                <a href = "#title">Message </a>
+                                        
+                </div>
+
+
+
+
+
                     <div>
                             Hello world
-                        <div>
-                            { socket ? (
-                                <div>
-                                    <Messages socket={socket} />
-                                    <MessageInput socket={socket} identity={email} />
-                                </div>
-                            ) : (
-                                <div>Not connected</div>
-                            )}
-                        </div>
+                        
+                            <div>
+                                { socket ? (
+                                    <div>
+                                        <Messages socket={socket} />
+                                        <MessageInput socket={socket} identity={email} />
+                                    </div>
+                                ) : (
+                                    <div>Not connected</div>
+                                )}
+                            </div>
+                        
                     </div>
                 </div>
 
