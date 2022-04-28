@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import "./mainpage.scss";
 
 import homeIcon from "../../Assets/house.png";
-
+import settingIcon from "../../Assets/setting.png";
+import searchIcon from "../../Assets/search.png";
+import AppIcon from "../../Assets/AppIcon.png";
 import './sidebar.jsx'
 
 const Main = () => {
@@ -46,18 +48,24 @@ const Main = () => {
             <body>
 
                 <div class="sidenav">
-                    <button href="#home"></button> <img src ={homeIcon} height = "40" width= "40"/>
-                    <button href="#search">Search</button>
-                    
-                    
-                   <footer>
-                   <button href = "#setting"
+                    <img src ={AppIcon}height = "100" width= "100"/>
+                    <button href="#home"><img src ={homeIcon} height = "40" width= "40"/></button> 
+                    <button href="#search"><img src ={searchIcon} height = "40" width= "40"/></button>
+                    <button href = "#setting"
                                 onClick={() => {
                                     navigate("/settings")
                                 }}
                             >
-                                Setting
+                                <img src ={settingIcon} height = "40" width= "40"/>
                     </button>
+                   <footer>
+                   <button
+                                onClick={() => logout({
+                                    returnTo: window.location.origin,
+                                })}
+                            >
+                            Logout
+                        </button>
                    </footer>
                         
                 </div>
@@ -65,13 +73,6 @@ const Main = () => {
                 <div class="main">
                     <div>
                             Hello world
-                            <button
-                                onClick={() => logout({
-                                    returnTo: window.location.origin,
-                                })}
-                            >
-                            Logout
-                        </button>
                         <div>
                             { socket ? (
                                 <div>

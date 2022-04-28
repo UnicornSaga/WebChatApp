@@ -24,13 +24,19 @@ body {
     display: block;
     background-color: transparent;
     border: transparent;
-    padding-left: 5px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20pt;
 }
 
 .sidenav button:hover {
     color: #3b052b;
+}
+
+.sidenav img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .main {
