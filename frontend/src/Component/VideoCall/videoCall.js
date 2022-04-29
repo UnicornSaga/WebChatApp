@@ -20,6 +20,7 @@ const VideoCall = ({ email }) => {
 	const [ idToCall, setIdToCall ] = useState("")
 	const [ callEnded, setCallEnded] = useState(true)
 	const [ name, setName ] = useState("")
+	const [count, setCount] = useState(0);
 
 	const myVideo = useRef()
 	const userVideo = useRef()
@@ -27,27 +28,22 @@ const VideoCall = ({ email }) => {
 	const connectionRef = useRef();
 
 	useEffect(() => {
-		console.log(callEnded);
 		if (!callEnded) return;
 		socket.current = io(`http://${window.location.hostname}:5000`, {
-            reconnection: true,
-            reconnectionDelay: 1000,
-            reconnectionDelayMax : 5000,
-            reconnectionAttempts: 99999
-        });
+			reconnection: true,
+			reconnectionDelay: 1000,
+			reconnectionDelayMax : 5000,
+			reconnectionAttempts: 99999
+		});
+
 		socket.current.on("me", (data) => {
 			console.log("Reconnect id: " + data);
 			setMe(data);
-		} )
+		})
 	}, [callEnded])
 
 	useEffect(() => {
 		initVideo();
-
-		socket.current.on("me", (data) => {
-			console.log(data);
-			setMe(data);
-		})
 
 		socket.current.on("callUser", (data) => {
 			setReceivingCall(true)
@@ -59,8 +55,6 @@ const VideoCall = ({ email }) => {
 
 		socket.current.on("callEnded", () => {
 			connectionRef.current.destroy();
-			socket.current.on("disconnect");
-			socket.current.on("connect");
 			resetAppState();
 		})
 	}, [])
@@ -113,8 +107,6 @@ const VideoCall = ({ email }) => {
 	const leaveCall = () => {
 		connectionRef.current.destroy();
 		socket.current.emit('callEnded');
-		socket.current.on("disconnect");
-		socket.current.on("connect");
 		resetAppState();
 	}
 
@@ -128,6 +120,7 @@ const VideoCall = ({ email }) => {
 	const resetAppState = () => {
 		setCallEnded(true)
 		setCallAccepted(false);
+		setCount(count + 1);
 		setReceivingCall(false);
 		initVideo();
 	}

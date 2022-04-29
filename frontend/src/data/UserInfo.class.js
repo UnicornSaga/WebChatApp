@@ -5,7 +5,7 @@ class UserInfo {
         this.name = name;
         this.description = description;
         this.age = age;
-        this.friendlist = friendlist;
+        this.friendlist = friendlist.split(",");
     }
 
     toJSON() {

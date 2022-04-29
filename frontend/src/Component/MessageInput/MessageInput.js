@@ -8,8 +8,9 @@ const NewMessage = ({ socket, identity }) => {
     e.preventDefault();
     const messageDetail = {
       input: value,
-      user: { id: identity, name: identity },
+      user: { id: socket.id, name: identity },
     }
+    console.log(socket.id);
     socket.emit('message', messageDetail);
     setValue('');
   };
