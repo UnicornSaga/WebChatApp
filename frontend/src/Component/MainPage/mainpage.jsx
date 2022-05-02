@@ -5,6 +5,9 @@ import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
 import VideoCall from '../VideoCall/videoCall';
 import { fetchUserInfo } from '../../services/UserInfo.service';
+import "./mainpage.scss";
+import messTitle from "../../Assets/mess.png";
+import Sidebar from "./sidebar";
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -41,28 +44,45 @@ const Main = () => {
       }, [getAccessTokenSilently]); */
 
     return (
-        <div>
-            Hello world
-            <button
-                onClick={() => logout({
-                    returnTo: window.location.origin,
-                })}
-            >
-                Logout
-            </button>
+    
+        <html>
+            <body>
+            <Sidebar logout={logout} />
+                
 
-            <div>
-                { socket ? (
+                <div class="main">
+
+                <div class="sidenav_beside">
+                    <img src ={messTitle}height = "80" width= "350"/>
+                    <footer></footer> 
+                </div>
+
+                <div class="message_box">
+
+                <a href = "#title">Message </a>
+                                        
+                </div>
                     <div>
-                        <Messages socket={socket} />
-                        <MessageInput socket={socket} identity={email} />
-                        {/* <VideoCall identity={email} /> */}
+                            Hello world
+                        
+                            <div>
+                                { socket ? (
+                                    <div>
+                                        <footer class="main">
+                                            <Messages socket={socket} />
+                                            <MessageInput socket={socket} identity={email} />
+                                        </footer>
+                                    </div>
+                                ) : (
+                                    <div>Not connected</div>
+                                )}
+                            </div>
+                        
                     </div>
-                ) : (
-                    <div>Not connected</div>
-                )}
-            </div>
-        </div>
+                </div>
+
+            </body>
+        </html>
     )
 }
 

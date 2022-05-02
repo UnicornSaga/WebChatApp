@@ -5,7 +5,7 @@ import "./Login.scss";
 import LoginImg1 from "../../Assets/upperImg.png";
 import LoginImg2 from "../../Assets/lowerImg.png";
 import LoginImg3 from "../../Assets/pngwing.png";
-import LoginImg4 from "../../Assets/pngwing1.png";
+import LoginImg4 from "../../Assets/AppIcon.png";
 import LoginImg5 from "../../Assets/heart.png";
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const Login = () => {
                     <div className='col-md-6'>
                         <div className="formContainer">
                             <div className="logo">
-                                <img src={LoginImg4} height="60px" width="60px" />
+                                <img src={LoginImg4} height="140px" width="140px" />
                             </div>
                             <h2>Login to your account</h2>
                             <p>Connect to your friends and family from across the globe!</p>
