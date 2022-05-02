@@ -4,16 +4,9 @@ import io from 'socket.io-client';
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
 import { fetchUserInfo } from '../../services/UserInfo.service';
-import { useNavigate } from 'react-router-dom';
 import "./mainpage.scss";
-
-import homeIcon from "../../Assets/house.png";
-import settingIcon from "../../Assets/setting.png";
-import searchIcon from "../../Assets/search.png";
-import AppIcon from "../../Assets/AppIcon.png";
-import logoutIcon from "../../Assets/logout.png";
 import messTitle from "../../Assets/mess.png";
-import './sidebar.jsx'
+import Sidebar from "./sidebar";
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -22,8 +15,6 @@ const Main = () => {
     const [socket, setSocket] = useState(null);
     const [accessToken, setAccessToken] = useState();
     const [customer, setCustomer] = useState();
-    
-    const navigate = useNavigate();
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`);
@@ -46,38 +37,16 @@ const Main = () => {
       }, [getAccessTokenSilently]);
 
     return (
+    
         <html>
             <body>
-
-                <div class="sidenav">
-                    <img src ={AppIcon}height = "100" width= "100"/>
-                    <button href="#home"><img src ={homeIcon} height = "40" width= "40"/></button> 
-                    <button href="#search"><img src ={searchIcon} height = "40" width= "40"/></button>
-                    <button href = "#setting"
-                                onClick={() => {
-                                    navigate("/settings")
-                                }}
-                            >
-                                <img src ={settingIcon} height = "40" width= "40"/>
-                    </button>
-                   <footer>
-                        <button
-                                onClick={() => logout({
-                                    returnTo: window.location.origin,
-                                })}
-                            >
-                            <img src ={logoutIcon} height = "40" width= "40"/>
-                        </button>
-                   </footer>
-                        
-                </div>
+            <Sidebar logout={logout} />
+                
 
                 <div class="main">
 
                 <div class="sidenav_beside">
-                    <a>...</a>
-                    <a class="title_text>">Messages </a>
-                    <img src ={messTitle}height = "70" width= "350"/>
+                    <img src ={messTitle}height = "80" width= "350"/>
                     <footer></footer> 
                 </div>
 

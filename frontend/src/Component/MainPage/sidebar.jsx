@@ -1,56 +1,47 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import homeIcon from "../../Assets/house.png";
+import settingIcon from "../../Assets/setting.png";
+import searchIcon from "../../Assets/search.png";
+import AppIcon from "../../Assets/AppIcon.png";
+import logoutIcon from "../../Assets/logout.png";
+import { Navigate } from "react-router-dom";
+import "./mainpage.scss";
 
 
-export default function sidebar( props ) {
+const Sidebar = ( { logout } ) => {
 
     return (
         <html>
-            {/* <body>
+            <body>
 
                 <div class="sidenav">
-                    <a href="#home">Home</a>
-                    <a href="#search">Search</a>
-                    <a href="#settings">Setting</a>
+                    <img src ={AppIcon}height = "100" width= "100"/>
+                    <button href="#home"><img src ={homeIcon} height = "40" width= "40"/></button> 
+                    <button href="#search"><img src ={searchIcon} height = "40" width= "40"/></button>
+                    <button href = "#setting"
+                                onClick={() => {
+                                    return <Navigate to="/setting" />
+                                }}
+                            >
+                                <img src ={settingIcon} height = "40" width= "40"/>
+                    </button>
+
+                   <footer>
+                        <button
+                                onClick={() => logout({
+                                    returnTo: window.location.origin,
+                                })}
+                            >
+                            <img src ={logoutIcon} height = "40" width= "40"/>
+                        </button>
+                   </footer>
+                        
                 </div>
-
-                <div class="main">
-                <h1>Settings</h1>
-            
-            <button
-                onClick={() => {
-                    navigate("/main");
-                } }
-            >
-                ◀ Back
-            </button>
-
-            <input
-                type="text"
-                onChange={onChange}
-                placeholder="Search..." />
-
-            {visibleOptions.map((option) => (
-                    <div key={option.header.name}>
-                        <h3>{option.header.name}</h3>
-
-                        <div>{option.values.map((value) => (
-                            <div key={value.name}>
-                                <ul>
-                                    <li>
-                                        <h6><button>{value.name}</button></h6>
-                                        <p>{value.description}</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        ))}
-
-                        </div>
-                    </div>))}
-                </div>
-
-            </body> */}
+            </body>
         </html>
 
     );
 }
+
+export default Sidebar;
