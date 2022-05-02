@@ -122,7 +122,7 @@ function Settings() {
                             >
                                 <img src ={settingIcon} height = "40" width= "40"/>
                     </button>
-                   <footer>
+                   <footer class="main">
                    
                    </footer>
                         

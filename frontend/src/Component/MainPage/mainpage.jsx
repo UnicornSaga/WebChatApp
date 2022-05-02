@@ -12,6 +12,7 @@ import settingIcon from "../../Assets/setting.png";
 import searchIcon from "../../Assets/search.png";
 import AppIcon from "../../Assets/AppIcon.png";
 import logoutIcon from "../../Assets/logout.png";
+import messTitle from "../../Assets/mess.png";
 import './sidebar.jsx'
 
 const Main = () => {
@@ -60,7 +61,7 @@ const Main = () => {
                                 <img src ={settingIcon} height = "40" width= "40"/>
                     </button>
                    <footer>
-                   <button
+                        <button
                                 onClick={() => logout({
                                     returnTo: window.location.origin,
                                 })}
@@ -73,26 +74,28 @@ const Main = () => {
 
                 <div class="main">
 
-                
+                <div class="sidenav_beside">
+                    <a>...</a>
+                    <a class="title_text>">Messages </a>
+                    <img src ={messTitle}height = "70" width= "350"/>
+                    <footer></footer> 
+                </div>
 
                 <div class="message_box">
 
                 <a href = "#title">Message </a>
                                         
                 </div>
-
-
-
-
-
                     <div>
                             Hello world
                         
                             <div>
                                 { socket ? (
                                     <div>
-                                        <Messages socket={socket} />
-                                        <MessageInput socket={socket} identity={email} />
+                                        <footer class="main">
+                                            <Messages socket={socket} />
+                                            <MessageInput socket={socket} identity={email} />
+                                        </footer>
                                     </div>
                                 ) : (
                                     <div>Not connected</div>

@@ -61,6 +61,10 @@ body {
     margin-right: 0;
 }
 
+.footer main{
+    margin-right: 0;
+}
+
 
 .messagle_box{
     height: 100%;
@@ -77,17 +81,14 @@ body {
 /* setting */
 
 
-// button  {position: absolute;
-// width: 48px;
-// height: 55px;
-// left: 71px;
-// top: 991px;
-
-// font-family: 'arial';
-// font-style: normal;
-// font-weight: 900;
-// font-size: 48px;
-// line-height: 55px;
-
-// color: #000000;
-// }
+.sidenav_beside {
+    height: 100%;
+    width: 350px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 10;
+    background-color: #CDB8F0;
+    overflow-x: auto;
+    padding-top: 20px;
+}
