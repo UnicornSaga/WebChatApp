@@ -15,6 +15,10 @@ class Connection {
     this.socket = socket;
     this.io = io;
 
+    socket.on("takeID", (data) => {
+      users.set(data.identity, socket.id);
+      users.forEach(user => console.log(user));
+    });
     socket.on('getMessages', () => this.getMessages());
     socket.on('message', (value) => this.handleMessage(value));
     socket.on('disconnect', () => this.disconnect());
@@ -24,7 +28,7 @@ class Connection {
   }
   
   sendMessage(message) {
-    this.io.sockets.emit('message', message);
+    this.io.to(users.get(message.destination)).to(users.get(message.user.name)).emit('message', message);
   }
   
   getMessages() {
@@ -36,7 +40,8 @@ class Connection {
       id: uuidv4(),
       user: temp.user || defaultUser,
       value: temp.input,
-      time: Date.now()
+      time: Date.now(),
+      destination: temp.destination,
     };
 
     messages.add(message);

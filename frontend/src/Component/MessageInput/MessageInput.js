@@ -8,9 +8,9 @@ const NewMessage = ({ socket, identity }) => {
     e.preventDefault();
     const messageDetail = {
       input: value,
-      user: { id: socket.id, name: identity },
+      user: { name: identity },
+      destination: "vuongvu1208@gmail.com",
     }
-    console.log(socket.id);
     socket.emit('message', messageDetail);
     setValue('');
   };

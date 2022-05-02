@@ -22,6 +22,7 @@ const Main = () => {
             reconnectionAttempts: 99999
         });
         setSocket(newSocket);
+        newSocket.emit("takeID", { identity: email });
         return () => newSocket.close();
     }, [setSocket]);
 
@@ -55,7 +56,7 @@ const Main = () => {
                     <div>
                         <Messages socket={socket} />
                         <MessageInput socket={socket} identity={email} />
-                        <VideoCall identity={email} />
+                        {/* <VideoCall identity={email} /> */}
                     </div>
                 ) : (
                     <div>Not connected</div>
