@@ -1,6 +1,13 @@
 .message-list {
-    max-width: 500px;
     width: 100%;
+    min-width: 0;
+    max-height: 50vh;
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   .message-container {

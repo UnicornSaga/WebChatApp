@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import io from 'socket.io-client';
+import { Col, Container } from "react-bootstrap";
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
+import Sidebar from "./sidebar";
 import VideoCall from '../VideoCall/videoCall';
 import { fetchUserInfo } from '../../services/UserInfo.service';
 import "./mainpage.scss";
 import messTitle from "../../Assets/mess.png";
-import Sidebar from "./sidebar";
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -16,6 +17,7 @@ const Main = () => {
     const [socket, setSocket] = useState(null);
     const [accessToken, setAccessToken] = useState();
     const [customer, setCustomer] = useState();
+    const [destination, setDestination] = useState();
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`, {
@@ -29,60 +31,74 @@ const Main = () => {
         return () => newSocket.close();
     }, [setSocket]);
 
-    /* useEffect(() => {
+    useEffect(() => {
         (async () => {
             try {
               const token = await getAccessTokenSilently();
-              console.log(token);
+              setAccessToken(token);
               const data = await fetchUserInfo(email, token);
-              console.log(data);
-              setCustomer(data);
-          } catch (e) {
+            setCustomer(data);
+            console.log(data);
+        } catch (e) {
             console.error(e);
           }
         })();
-      }, [getAccessTokenSilently]); */
+      }, [getAccessTokenSilently]);
 
+    const renderFriend = async () => {
+        const data = await fetchUserInfo(email, accessToken);
+        setCustomer(data);
+        console.log(data);
+        return data;
+    }
+    
     return (
     
-        <html>
-            <body>
-            <Sidebar logout={logout} />
-                
+        <>
+            <Sidebar logout={logout}>
+                <Col className="inboxWrapper">
+                    <img src ={messTitle} height = "80" width= "350"/>
+                    {customer ? customer.friendlist.map((friend, id) => (
+                        <div
+                            onClick={() => {
+                                setDestination(friend)
+                                console.log(friend)
+                            }}
+                            className="inboxContainer"
+                        >
+                            {friend}
+                            <hr />
+                        </div>
+                    )) : (
+                        <div>
+                            Loading...
+                        </div>
+                    )}
+                </Col>
 
-                <div class="main">
-
-                <div class="sidenav_beside">
-                    <img src ={messTitle}height = "80" width= "350"/>
-                    <footer></footer> 
-                </div>
-
-                <div class="message_box">
-
-                <a href = "#title">Message </a>
-                                        
-                </div>
-                    <div>
-                            Hello world
-                        
+                <Col className="contentWrapper">
+                    <Container fluid className="h-100 contentContainer">
+                        <div className="main">
                             <div>
                                 { socket ? (
-                                    <div>
-                                        <footer class="main">
+                                    <div className='messageWrapper'>
+                                        <div className='messageReceive'>
                                             <Messages socket={socket} />
-                                            <MessageInput socket={socket} identity={email} />
-                                        </footer>
+                                        </div>
+
+                                        <div className='inputForm'>
+                                            <MessageInput socket={socket} identity={email} destination={destination}/>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>Not connected</div>
                                 )}
                             </div>
-                        
-                    </div>
-                </div>
-
-            </body>
-        </html>
+                        </div>
+                    </Container>
+                </Col>
+            </Sidebar>
+        </>
     )
 }
 

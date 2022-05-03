@@ -1,50 +1,43 @@
-body {
-    font-family: "Lato", sans-serif;
+.inboxWrapper {
+    max-width: 350px;
+    margin: 0;
+    padding: 0;
+    background-color: #CDB8F0;
+
+    .inboxContainer {
+        text-align: center;
+        padding: 10px;
+    }
 }
 
-.sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #C3A5F1;
-    overflow-x: hidden;
-    padding-top: 20px;
-    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
-}
+.contentWrapper {
+    min-width: 0;
+    width: 100%;
+    padding: 0;
 
-.sidenav button {
-    padding: 6px 8px 6px 16px;
-    text-decoration: None;
-    text-align: center;
-    font-size: 25px;
-    color: #000000;
-    display: block;
-    background-color: transparent;
-    border: transparent;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 20pt;
-}
-
-.sidenav button:hover {
-    color: #3b052b;
-}
-
-.sidenav img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    .contentContainer {
+        margin-left: -15px;
+    }
 }
 
 .main {
-    margin-left: 160px;
-    /* Same as the width of the sidenav */
-    font-size: 28px;
-    /* Increased text to enable scrolling */
-    padding: 0px 10px;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+
+    .messageWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+             
+        .messageReceive {
+            margin-bottom: auto;
+        }
+
+        .inputForm {
+            margin-top: auto;
+        }
+    }
 }
 
 @media screen and (max-height: 450px) {
@@ -55,40 +48,4 @@ body {
     .sidenav a {
         font-size: 18px;
     }
-}
-
-.footer {
-    margin-right: 0;
-}
-
-.footer main{
-    margin-right: 0;
-}
-
-
-.messagle_box{
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 160;
-    background-color: #C3A5F1;
-    overflow-x: hidden;
-    padding-top: 20px;
-    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
-}
-/* setting */
-
-
-.sidenav_beside {
-    height: 100%;
-    width: 350px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 10;
-    background-color: #CDB8F0;
-    overflow-x: auto;
-    padding-top: 20px;
 }

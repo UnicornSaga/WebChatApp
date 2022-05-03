@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MessageInput.scss';
 
-const NewMessage = ({ socket, identity }) => {
+const NewMessage = ({ socket, identity, destination }) => {
   const [value, setValue] = useState('');
 
   const submitForm = (e) => {
@@ -9,7 +9,7 @@ const NewMessage = ({ socket, identity }) => {
     const messageDetail = {
       input: value,
       user: { name: identity },
-      destination: "vuongvu1208@gmail.com",
+      destination: destination,
     }
     socket.emit('message', messageDetail);
     setValue('');
@@ -18,6 +18,7 @@ const NewMessage = ({ socket, identity }) => {
   return (
     <form onSubmit={submitForm}>
       <input
+        className='form-control w-100'
         autoFocus
         value={value}
         placeholder="Type your message"

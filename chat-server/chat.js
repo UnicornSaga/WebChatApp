@@ -17,7 +17,6 @@ class Connection {
 
     socket.on("takeID", (data) => {
       users.set(data.identity, socket.id);
-      users.forEach(user => console.log(user));
     });
     socket.on('getMessages', () => this.getMessages());
     socket.on('message', (value) => this.handleMessage(value));
