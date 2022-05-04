@@ -46,13 +46,13 @@ class Connection {
     messages.add(message);
     this.sendMessage(message);
 
-    setTimeout(
+    /* setTimeout(
       () => {
         messages.delete(message);
         this.io.sockets.emit('deleteMessage', message.id);
       },
       messageExpirationTimeMS,
-    );
+    ); */
   }
 
   disconnect() {
