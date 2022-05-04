@@ -18,6 +18,15 @@
     .contentContainer {
         margin-left: -15px;
     }
+
+    .messageWrapper {
+        display: flex;
+        flex-direction: column;
+
+        .inputForm {
+            margin-top: auto;
+        }
+    }
 }
 
 .main {

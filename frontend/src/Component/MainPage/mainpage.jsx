@@ -98,13 +98,15 @@ const Main = () => {
                                 { socket ? (
                                     <div className='messageWrapper'>
                                         <div>
-                                            <div className='messageReceive'>
-                                                <Messages socket={socket} />
+                                            <Messages socket={socket} email={email}/>
+                                            <MessageInput socket={socket} identity={email} destination={destination}/>
+                                            {/* <div className='messageReceive'>
+                                                
                                             </div>
 
                                             <div className='inputForm'>
-                                                <MessageInput socket={socket} identity={email} destination={destination}/>
-                                            </div>
+                                                
+                                            </div> */}
                                         </div>
                                     </div>
                                 ) : (
