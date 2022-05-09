@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import ChatBubble from 'react-chat-bubble';
+import React, { useEffect, useRef, useState } from 'react';
+import ChatBubble from './ChatBubble';
 import Ava1 from "../../Assets/ava1.png";
 import Ava2 from "../../Assets/ava2.png";
 import './Messages.scss';
 
 function Messages({ socket, email, from, messages, setMessages }) {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
+  useEffect(scrollToBottom, [messages]);
+
   useEffect(() => {
     const messageListener = (message) => {
       if (message.user.name !== email && message.user.name !== from) return;
@@ -21,21 +29,11 @@ function Messages({ socket, email, from, messages, setMessages }) {
       });
     };
   
-    /* const deleteMessageListener = (messageID) => {
-      setMessages((prevMessages) => {
-        const newMessages = {...prevMessages};
-        delete newMessages[messageID];
-        return newMessages;
-      });
-    }; */
-  
     socket.on('message', messageListener);
-    // socket.on('deleteMessage', deleteMessageListener);
     socket.emit('getMessages');
 
     return () => {
       socket.off('message', messageListener);
-      // socket.off('deleteMessage', deleteMessageListener);
     };
   }, [socket]);
 
@@ -45,7 +43,6 @@ function Messages({ socket, email, from, messages, setMessages }) {
         return message;
       }
     })
-    console.log(tmp);
     return tmp;
   }
 
@@ -66,7 +63,8 @@ function Messages({ socket, email, from, messages, setMessages }) {
           </div>
         ))
       } */}
-      <ChatBubble messages={filterMessage()} className="chat" />
+      
+      <ChatBubble messages={filterMessage()}  dummy={<div ref={messagesEndRef}/>} />
     </div>
   );
 }

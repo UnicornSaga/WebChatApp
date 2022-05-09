@@ -24,6 +24,7 @@ sdist/
 var/
 *.egg-info/
 .installed.cfg
+*.cfg
 *.egg
 
 # PyInstaller
@@ -99,4 +100,3 @@ ENV/
 # Prometheus
 multiproc-tmp
 
-*.cfg

@@ -1,18 +1,22 @@
-.layoutContainer {
-    padding: 0;
-    overflow: hidden;
-    background-color: #C3A5F1;
+.page {
+    position: fixed;
 
-    .sidebarWrapper {
-        min-height: 100vh !important;
-        padding: 20px;
-
-        .sidebarItem {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
+    .layoutContainer {
+        padding: 0;
+        overflow: hidden;
+        background-color: #C3A5F1;
+    
+        .sidebarWrapper {
+            min-height: 100vh !important;
+            padding: 20px;
+    
+            .sidebarItem {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 10px;
+            }
         }
     }
 }

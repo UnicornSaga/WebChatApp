@@ -14,7 +14,7 @@ import "./sidebar.scss";
 const Sidebar = ( { children, logout } ) => {
 
     return (
-        <Container fluid className="p-0">
+        <Container fluid className="p-0 page">
             <div className="p-0 h-100 layoutContainer">
                 <Row>
                     <Col xs={1} className="sidebarWrapper m-3">
