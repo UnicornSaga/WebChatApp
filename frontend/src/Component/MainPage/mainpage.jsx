@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import io from 'socket.io-client';
+import Popup from 'reactjs-popup';
 import { Col, Container, Button } from "react-bootstrap";
 import Messages from '../Messages/Messages';
 import MessageInput from '../MessageInput/MessageInput';
@@ -9,7 +10,8 @@ import VideoCall from '../VideoCall/videoCall';
 import { fetchUserInfo, updateUserInfo } from '../../services/UserInfo.service';
 import "./mainpage.scss";
 import messTitle from "../../Assets/mess.png";
-import Popup from 'reactjs-popup';
+import minus from "../../Assets/minus.png";
+import OnlineStatus from "../../Assets/online.png";
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -20,6 +22,8 @@ const Main = () => {
     const [customer, setCustomer] = useState();
     const [destination, setDestination] = useState(null);
     const [newFriend, setNewFriend] = useState();
+    const [messageRender, setMessageRender] = useState(new Map());
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`, {
@@ -29,7 +33,7 @@ const Main = () => {
             reconnectionAttempts: 99999
         });
         setSocket(newSocket);
-        newSocket.emit("takeID", { identity: email });
+        newSocket.emit("takeID", { identity: email })
         return () => newSocket.close();
     }, [setSocket]);
 
@@ -55,6 +59,39 @@ const Main = () => {
         setNewFriend("");
     }
 
+    const deleteFriend = async (friend) => {
+        const tmp = customer;
+        tmp.friendlist.splice(tmp.friendlist.indexOf(friend), 1);
+        await updateUserInfo(tmp, accessToken);
+        setCustomer(tmp);
+    }
+
+    const renderFriendlist = () => {
+        if (customer.friendlist.length !== 0) {
+            return (
+                customer.friendlist.map((friend) => (
+                    <div
+                        onClick={() => {
+                            setDestination(friend)
+                            
+                        }}
+                        className="inboxContainer"
+                    >
+                        {friend}
+                        <img src={minus} height = '20' width="20" onClick={async () => await deleteFriend(friend)}/>
+                        <hr />
+                    </div>
+                    )
+                )
+            )
+        }
+        return (
+            <div>
+                NO FRIEND
+            </div>
+        )
+    }
+
     
     return (
     
@@ -73,18 +110,7 @@ const Main = () => {
                         />
                         <Button onClick={async () => await addFriend()}>Add Friend</Button>
                     </Popup>
-                    {customer ? customer.friendlist.map((friend, id) => (
-                        <div
-                            onClick={() => {
-                                setDestination(friend)
-                                
-                            }}
-                            className="inboxContainer"
-                        >
-                            {friend}
-                            <hr />
-                        </div>
-                    )) : (
+                    {customer ? renderFriendlist() : (
                         <div>
                             Loading...
                         </div>
@@ -95,22 +121,23 @@ const Main = () => {
                     <Container fluid className="h-100 contentContainer">
                         <div className="main">
                             <div>
-                                { socket ? (
+                                { socket && destination ? (
                                     <div className='messageWrapper'>
                                         <div>
-                                            <Messages socket={socket} email={email}/>
-                                            <MessageInput socket={socket} identity={email} destination={destination}/>
-                                            {/* <div className='messageReceive'>
-                                                
-                                            </div>
+                                            {destination}
+                                        </div>
+                                        <hr />
 
-                                            <div className='inputForm'>
-                                                
-                                            </div> */}
+                                        <div className='messageReceive'>
+                                            <Messages socket={socket} email={email} from={destination} messages={messages} setMessages={setMessages} />
+                                        </div>
+                    
+                                        <div className='inputForm'>
+                                            <MessageInput socket={socket} identity={email} destination={destination}/>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div>Not connected</div>
+                                    <></>
                                 )}
                             </div>
                         </div>

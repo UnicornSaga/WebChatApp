@@ -5,21 +5,18 @@ import Ava1 from "../../Assets/ava1.png";
 import Ava2 from "../../Assets/ava2.png";
 import './Messages.scss';
 
-function Messages({ socket, email }) {
-  const [messages, setMessages] = useState([]);
-
+function Messages({ socket, email, from, messages, setMessages }) {
   useEffect(() => {
     const messageListener = (message) => {
+      if (message.user.name !== email && message.user.name !== from) return;
       setMessages((prevMessages) => {
         const newMessages = [...prevMessages];
-        /* newMessages[message.id] = {
-          "type": message.user.name == email ? 0 : 1,
-          "text": message.value,
-        }; */
         newMessages.push({
           "type": message.user.name == email ? 0 : 1,
           "image": message.user.name == email ? Ava1 : Ava2,
           "text": message.value,
+          from: message.user.name,
+          destination: message.destination,
         })
         return newMessages;
       });
@@ -43,6 +40,16 @@ function Messages({ socket, email }) {
     };
   }, [socket]);
 
+  const filterMessage = () => {
+    const tmp = messages.filter((message) => {
+      if ((message.from == email && message.destination == from) || (message.from == from && message.destination == email)) {
+        return message;
+      }
+    })
+    console.log(tmp);
+    return tmp;
+  }
+
 
   return (
     <div className="message-list">
@@ -60,7 +67,7 @@ function Messages({ socket, email }) {
           </div>
         ))
       } */}
-      <ChatBubble messages={messages} className="chat" />
+      <ChatBubble messages={filterMessage()} className="chat" />
     </div>
   );
 }

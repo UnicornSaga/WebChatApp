@@ -7,6 +7,10 @@
     .inboxContainer {
         text-align: center;
         padding: 10px;
+
+        img {
+            float: right;
+        }
     }
 }
 
@@ -17,31 +21,28 @@
 
     .contentContainer {
         margin-left: -15px;
+
+        .main {
+            font-size: 25px;
+                    
+            /* .messageWrapper {
+                display: flex;
+                flex-direction: column;
+                     
+                .messageReceive {
+
+                }
+        
+                .inputForm {
+                    justify-content: flex-end;
+                }
+            } */
+        }
     }
 
     .messageWrapper {
         display: flex;
         flex-direction: column;
-
-        .inputForm {
-            margin-top: auto;
-        }
-    }
-}
-
-.main {
-    font-size: 25px;
-    display: flex;
-    flex-direction: column;
-
-    .messageWrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-             
-        .messageReceive {
-            margin-bottom: auto;
-        }
 
         .inputForm {
             margin-top: auto;
