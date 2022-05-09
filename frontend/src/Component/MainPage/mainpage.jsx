@@ -118,23 +118,18 @@ const Main = () => {
                 </Col>
 
                 <Col className="contentWrapper">
-                    <Container fluid className="h-100 contentContainer">
+                    <Container fluid className="contentContainer">
                         <div className="main">
                             <div>
                                 { socket && destination ? (
-                                    <div className='messageWrapper'>
+                                    <div>
                                         <div>
                                             {destination}
                                         </div>
                                         <hr />
 
-                                        <div className='messageReceive'>
-                                            <Messages socket={socket} email={email} from={destination} messages={messages} setMessages={setMessages} />
-                                        </div>
-                    
-                                        <div className='inputForm'>
-                                            <MessageInput socket={socket} identity={email} destination={destination}/>
-                                        </div>
+                                        <Messages socket={socket} email={email} from={destination} messages={messages} setMessages={setMessages} className="h-100" />
+                                        <MessageInput socket={socket} identity={email} destination={destination}/>
                                     </div>
                                 ) : (
                                     <></>

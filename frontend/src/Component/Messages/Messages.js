@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react';
 import ChatBubble from 'react-chat-bubble';
 import Ava1 from "../../Assets/ava1.png";
