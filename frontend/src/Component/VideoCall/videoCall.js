@@ -7,11 +7,11 @@ import React, { useEffect, useRef, useState } from "react"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from 'socket.io-client';
-// import "./videoCall.scss";
+import "./videoCall.scss";
 
-const VideoCall = ({ email }) => {
+const VideoCall = ({ email, destination }) => {
 	// const [ socket, setSocket ] = useState(inputSocket);
-    const [ me, setMe ] = useState("")
+    const [ me, setMe ] = useState(email)
 	const [ stream, setStream ] = useState()
 	const [ receivingCall, setReceivingCall ] = useState(false)
 	const [ caller, setCaller ] = useState("")
@@ -36,10 +36,10 @@ const VideoCall = ({ email }) => {
 			reconnectionAttempts: 99999
 		});
 
-		socket.current.on("me", (data) => {
-			console.log("Reconnect id: " + data);
+		/* socket.current.on("me", (data) => {
 			setMe(data);
-		})
+		}) */
+		socket.current.emit("identity", { identity: me })
 	}, [callEnded])
 
 	useEffect(() => {
@@ -67,10 +67,10 @@ const VideoCall = ({ email }) => {
 		})
 		peer.on("signal", (data) => {
 			socket.current.emit("callUser", {
-				userToCall: id,
+				userToCall: destination,
 				signalData: data,
 				from: me,
-				name: name
+				name: me
 			})
 		})
 		peer.on("stream", (stream) => {
@@ -126,67 +126,44 @@ const VideoCall = ({ email }) => {
 	}
 
 	return (
-		<>
-            <div className="container">
-                <div className="video-container">
-                    <div className="video">
-                        {stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-                    </div>
-                    <div className="video">
-                        {callAccepted && !callEnded ?
-                        <video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
-                        null}
-                    </div>
-                </div>
+		<div className="container">
+			<div className="video-container">
+				<div className="video">
+					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+				</div>
+				<div className="video">
+					{callAccepted && !callEnded ?
+					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+					null}
+				</div>
+			</div>
 
-                <div className="myId">
-                    <TextField
-                        id="filled-basic"
-                        label="Name"
-                        variant="filled"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        style={{ marginBottom: "20px" }}
-                    />
-                    <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
-                        <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
-                            Copy ID
-                        </Button>
-                    </CopyToClipboard>
+			<div className="myId">
+				<div className="call-button">
+					{callAccepted && !callEnded ? (
+						<Button variant="contained" color="secondary" onClick={leaveCall}>
+							End Call
+						</Button>
+					) : (
+						<IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
+							<PhoneIcon fontSize="large" />
+						</IconButton>
+					)}
+					{idToCall}
+				</div>
+			</div>
 
-                    <TextField
-                        id="filled-basic"
-                        label="Email to call"
-                        variant="filled"
-                        value={idToCall}
-                        onChange={(e) => setIdToCall(e.target.value)}
-                    />
-                    <div className="call-button">
-                        {callAccepted && !callEnded ? (
-                            <Button variant="contained" color="secondary" onClick={leaveCall}>
-                                End Call
-                            </Button>
-                        ) : (
-                            <IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
-                                <PhoneIcon fontSize="large" />
-                            </IconButton>
-                        )}
-                        {idToCall}
-                    </div>
-                </div>
-
-                <div>
-                    {receivingCall && !callAccepted ? (
-                            <div className="caller">
-                            <h1 >{name} is calling...</h1>
-                            <Button variant="contained" color="primary" onClick={answerCall}>
-                                Answer
-                            </Button>
-                        </div>
-                    ) : null}
-                </div>
-            </div>
-		</>
+			<div>
+				{receivingCall && !callAccepted ? (
+						<div className="caller">
+						<h1 >{name} is calling...</h1>
+						<Button variant="contained" color="primary" onClick={answerCall}>
+							Answer
+						</Button>
+					</div>
+				) : null}
+			</div>
+		</div>
 	)
 }
 

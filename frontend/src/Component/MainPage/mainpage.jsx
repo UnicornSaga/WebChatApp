@@ -8,10 +8,12 @@ import MessageInput from '../MessageInput/MessageInput';
 import Sidebar from "./sidebar";
 import VideoCall from '../VideoCall/videoCall';
 import { fetchUserInfo, updateUserInfo } from '../../services/UserInfo.service';
+import NewWindow from 'react-new-window';
 import "./mainpage.scss";
 import messTitle from "../../Assets/mess.png";
 import minus from "../../Assets/minus.png";
 import OnlineStatus from "../../Assets/online.png";
+import VideoIcon from "../../Assets/videoCall.png";
 
 const Main = () => {
     const { logout, getAccessTokenSilently, user } = useAuth0();
@@ -24,6 +26,7 @@ const Main = () => {
     const [newFriend, setNewFriend] = useState();
     const [messageRender, setMessageRender] = useState(new Map());
     const [messages, setMessages] = useState([]);
+    const [isVideo, setVideo] = useState(false);
 
     useEffect(() => {
         const newSocket = io(`http://${window.location.hostname}:5000`, {
@@ -53,6 +56,9 @@ const Main = () => {
 
     const addFriend = async () => {
         const tmp = customer;
+        if (tmp.friendlist === null) {
+            tmp.friendlist = [];
+        }
         tmp.friendlist.push(newFriend);
         await updateUserInfo(tmp, accessToken);
         setCustomer(tmp);
@@ -67,7 +73,7 @@ const Main = () => {
     }
 
     const renderFriendlist = () => {
-        if (customer.friendlist.length !== 0) {
+        if (customer.friendlist !== null) {
             return (
                 customer.friendlist.map((friend) => (
                     <div
@@ -123,8 +129,14 @@ const Main = () => {
                             <div>
                                 { socket && destination ? (
                                     <div>
-                                        <div>
-                                            {destination}
+                                        <div className="userInfo">
+                                            <div>
+                                                {destination}
+                                            </div>
+                                            
+                                            <div onClick={() => setVideo(!isVideo)}>
+                                                <img src={VideoIcon} height="30" width="30" />
+                                            </div>
                                         </div>
                                         <hr />
 
@@ -134,6 +146,15 @@ const Main = () => {
                                 ) : (
                                     <></>
                                 )}
+                                { isVideo && <NewWindow
+                                            title="VideoChat"
+                                            features={{
+                                                outerHeight: "50%",
+                                                outerWidth: "50%"
+                                            }}
+                                        >
+                                            <VideoCall email={email} destination={destination} />
+                                        </NewWindow> }
                             </div>
                         </div>
                     </Container>
