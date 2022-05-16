@@ -13,5 +13,12 @@ class User(models.Model):
         null = True
     )
 
+    def __init__(self, email, name, description, age, friendlist):
+        self.email = email
+        self.name = name
+        self.description = description
+        self.age = age
+        self.friendlist = friendlist
+
     class Meta:
         ordering = ['id']

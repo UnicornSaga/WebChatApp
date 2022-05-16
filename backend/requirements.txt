@@ -6,3 +6,4 @@ mysqlclient
 python-dotenv
 django_mysql
 django-cors-headers
+redgreenunittest
