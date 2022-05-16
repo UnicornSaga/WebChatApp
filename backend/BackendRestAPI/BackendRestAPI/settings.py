@@ -60,7 +60,7 @@ REST_FRAMEWORK = {
 }
 
 # Test runner
-TEST_RUNNER = "redgreenunittest.django.RedGreenDiscoverRunner"
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -131,6 +131,9 @@ DATABASES = {
         'PASSWORD': 'criu4ojqvom3wcxd',
         'HOST': 'jtb9ia3h1pgevwb1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
+        'TEST': {
+            'NAME': 'test_j6euz5gefxizih0n',
+        }
     }
 }
 
