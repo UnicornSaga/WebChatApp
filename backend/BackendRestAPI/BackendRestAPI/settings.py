@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'BackendRestAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'j6euz5gefxizih0n',
@@ -135,9 +135,9 @@ WSGI_APPLICATION = 'BackendRestAPI.wsgi.application'
             'NAME': 'test_j6euz5gefxizih0n',
         }
     }
-} """
+}
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'o3urlbxey7aav27w',
@@ -149,7 +149,7 @@ DATABASES = {
             'NAME': 'o3urlbxey7aav27w',
         }
     }
-}
+} """
 
 
 # Password validation
