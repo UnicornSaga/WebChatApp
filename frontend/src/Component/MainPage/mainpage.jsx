@@ -44,6 +44,7 @@ const Main = () => {
         (async () => {
             try {
               const token = await getAccessTokenSilently();
+              console.log(token);
               setAccessToken(token);
               const data = await fetchUserInfo(email, token);
             setCustomer(data);

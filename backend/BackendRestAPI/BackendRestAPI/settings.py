@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'BackendRestAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'j6euz5gefxizih0n',
@@ -133,6 +133,20 @@ DATABASES = {
         'PORT': '3306',
         'TEST': {
             'NAME': 'test_j6euz5gefxizih0n',
+        }
+    }
+} """
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'o3urlbxey7aav27w',
+        'USER': 'zs0rgpj07istkeej',
+        'PASSWORD': 'rn3e22227214ie6z',
+        'HOST': 'ilzyz0heng1bygi8.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
+        'PORT': '3306',
+        'TEST': {
+            'NAME': 'o3urlbxey7aav27w',
         }
     }
 }
