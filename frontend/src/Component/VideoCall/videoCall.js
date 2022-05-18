@@ -8,6 +8,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from 'socket.io-client';
 import "./videoCall.scss";
+//import leaveCallIcon from "../../Assets/leaveCall.png";
+import leaveCallIcon from "../../Assets/logout.png";
 
 const VideoCall = ({ email, destination }) => {
 	// const [ socket, setSocket ] = useState(inputSocket);
@@ -129,20 +131,22 @@ const VideoCall = ({ email, destination }) => {
 		<div className="container">
 			<div className="video-container">
 				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-				</div>
-				<div className="video">
 					{callAccepted && !callEnded ?
-					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+					<video playsInline ref={userVideo} autoPlay style={{ width: "550px"}} />:
 					null}
+
+						<div className="video">
+							{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "550px" }} />}
+						</div>
+
 				</div>
 			</div>
 
 			<div className="myId">
 				<div className="call-button">
 					{callAccepted && !callEnded ? (
-						<Button variant="contained" color="secondary" onClick={leaveCall}>
-							End Call
+						<Button variant="contained" color='red' onClick={leaveCall}>
+							<img src ={leaveCallIcon} height = "50" width= "50" />
 						</Button>
 					) : (
 						<IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
