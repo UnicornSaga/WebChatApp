@@ -1,0 +1,9 @@
+Django
+djangorestframework
+python-jose
+requests
+mysqlclient
+python-dotenv
+django_mysql
+django-cors-headers
+redgreenunittest

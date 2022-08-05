@@ -1,0 +1,33 @@
+.message-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    max-height: 85vh;
+    height: 90vh;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .message-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eeeeee;
+  }
+  
+  .user, .date {
+    font-size: 0.625rem;
+    color: #888888;
+  }
+  
+  .user {
+    min-width: 120px;
+  }
+  
+  .message {
+    flex-grow: 1;
+  }

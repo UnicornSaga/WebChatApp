@@ -2,9 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
-from rest_framework import status
-from .Models.Todo import Todo
-from RestAPI.serializers import TodoSerializer
+from rest_framework.parsers import JSONParser
+from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticated
+from .Models.Users import User
+from RestAPI.serializers import UserSerializer
+
 
 # Create your views here.
 class JSONResponse(HttpResponse):
@@ -13,37 +16,52 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-@csrf_exempt
-def todo_list(request):
-    if request.method == 'GET':
-        Todos = Todo.objects.all()
-        Todo_serializer = TodoSerializer(Todos, many=True)
-        return JSONResponse(Todo_serializer.data)
-    elif request.method == 'POST':
-        Todo_data = JSONParser().parse(request)
-        Todo_serializer = TodoSerializer(data=Todo_data)
-        if Todo_serializer.is_valid():
-            Todo_serializer.save()
-            return JSONResponse(Todo_serializer.data, status=status.HTTP_201_CREATED)
-        return JSONResponse(Todo_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserViewset(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-@csrf_exempt
-def todo_detail(request, name):
-    try:
-        todo = Todo.objects.get(name=name)
-    except Todo.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    lookup_field = 'email'
+    lookup_value_regex = '[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}'
 
-    if request.method == 'GET':
-        todo_serializer = TodoSerializer(todo)
-        return JSONResponse(todo_serializer.data)
-    elif request.method == 'PUT':
-        todo_data = JSONParser().parse(request)
-        todo_serializer = TodoSerializer(todo, data=todo_data)
-        if todo_serializer.is_valid():
-            todo_serializer.save()
-            return JSONResponse(todo_serializer.data)
-        return JSONResponse(todo_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        todo.delete()
+    def list(self, request):
+        # GET - Show all users
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return JSONResponse(serializer.data)
+
+    def create(self, request):
+        # POST - Add new user
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JSONResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, email=None):
+        # GET - Show <email> user
+        user = User.objects.get_or_create(email=email)
+        serializer = UserSerializer(user[0])
+        return JSONResponse(serializer.data)
+
+    def update(self, request, email=None):
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, email=None):
+        # DETELE - Delete <email> user
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        user.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)

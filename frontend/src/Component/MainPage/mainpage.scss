@@ -1,0 +1,49 @@
+.inboxWrapper {
+    max-width: 350px;
+    margin: 0;
+    padding: 0;
+    background-color: #CDB8F0;
+
+    .inboxContainer {
+        text-align: center;
+        padding: 10px;
+
+        img {
+            float: right;
+        }
+    }
+}
+
+.contentWrapper {
+    min-width: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .contentContainer {
+        margin-left: -15px;
+        height: 100%;
+
+        .main {
+            font-size: 25px;
+
+            .userInfo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}

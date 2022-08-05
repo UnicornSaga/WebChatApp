@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #CDB8F0;
+
+	.video-container {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+	}
+}
+
+.myId {
+	border-radius: 5px;
+	padding: 2rem;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+
+	.call-button {
+		border-radius: 5px;
+		background-color: #C3A5F1;
+		text-align: center;
+		margin-top: 2rem;
+	}
+}
+
+
+.caller {
+	text-align: center;
+	color: #fff;
+}
+
+body {
+	background: #4776e6; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #8e54e9, #4776e6); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#8e54e9,
+		#4776e6
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

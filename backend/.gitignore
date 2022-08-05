@@ -24,6 +24,7 @@ sdist/
 var/
 *.egg-info/
 .installed.cfg
+*.cfg
 *.egg
 
 # PyInstaller
@@ -78,7 +79,7 @@ target/
 celerybeat-schedule
 
 # dotenv
-.env
+# .env
 
 # virtualenv
 venv/
@@ -98,3 +99,4 @@ ENV/
 
 # Prometheus
 multiproc-tmp
+
